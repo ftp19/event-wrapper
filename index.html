@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Live Event</title>
+<style>
+  body, html {
+    margin: 0; padding: 0; height: 100%; overflow: hidden;
+    font-family: Arial, sans-serif;
+  }
+  #eventFrame {
+    width: 100vw;
+    height: 100vh;
+    border: none;
+  }
+  #loading {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    color: #666;
+  }
+</style>
+</head>
+<body>
+  <div id="loading">🔄 Loading event...</div>
+  <iframe id="eventFrame" src="" onload="document.getElementById('loading').style.display='none'"></iframe>
+  
+  <script>
+    // Read eventId from URL query string
+    const params = new URLSearchParams(window.location.search);
+    const eventId = params.get('eventId');
+
+    if (eventId) {
+      // Set iframe src to your real event URL
+      document.getElementById('eventFrame').src = `https://yourserver.com/eventsystem_participant/${eventId}`;
+    } else {
+      document.body.innerHTML = '<p style="text-align:center;margin-top:2em;color:#900;">Invalid event ID</p>';
+    }
+  </script>
+</body>
+</html>
